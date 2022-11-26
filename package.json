@@ -1,0 +1,19 @@
+{
+  "name": "housingmarketplace",
+  "version": "1.0.0",
+  "description": "Housing Marketplace",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tejasdhanani/housingmarketplace.git"
+  },
+  "author": "Tejas Dhanani and Yash Ranipa",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tejasdhanani/housingmarketplace/issues"
+  },
+  "homepage": "https://github.com/tejasdhanani/housingmarketplace#readme"
+}
