@@ -21,7 +21,7 @@ const updateHouse = (req, res) => {
 
 // @desc    Delete house
 // @route   DELETE /api/houses/:id
-// @access  Public
+// @access  Private
 const deleteHouse = (req, res) => {
   res.status(200).json({ message: `Delete house ${req.params.id}` });
 };
