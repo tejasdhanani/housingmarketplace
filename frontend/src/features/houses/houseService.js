@@ -28,9 +28,23 @@ const getHouses = async (token) => {
   return response.data;
 };
 
+// Delete user house
+const deleteHouse = async (houseId, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.delete(API_URL + houseId, config);
+
+  return response.data;
+};
+
 const houseService = {
   createHouse,
   getHouses,
+  deleteHouse,
 };
 
 export default houseService;

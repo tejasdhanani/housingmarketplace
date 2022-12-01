@@ -47,6 +47,25 @@ export const getHouses = createAsyncThunk(
   }
 );
 
+// Delete user house
+export const deleteHouse = createAsyncThunk(
+  "houses/delete",
+  async (id, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await houseService.deleteHouse(id, token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const houseSlice = createSlice({
   name: "house",
   initialState,
@@ -78,6 +97,22 @@ export const houseSlice = createSlice({
         state.goals = action.payload;
       })
       .addCase(getHouses.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+
+      .addCase(deleteHouse.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteHouse.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.houses = state.houses.filter(
+          (house) => house._id !== action.payload.id
+        );
+      })
+      .addCase(deleteHouse.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
