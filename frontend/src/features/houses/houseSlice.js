@@ -9,13 +9,32 @@ const initialState = {
   message: "",
 };
 
-// Create new goal
+// Create new house
 export const createHouse = createAsyncThunk(
   "houses/create",
   async (houseData, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
       return await houseService.createHouse(houseData, token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+// Get user house
+export const getHouses = createAsyncThunk(
+  "houses/getAll",
+  async (_, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await houseService.getHouses(token);
     } catch (error) {
       const message =
         (error.response &&
@@ -45,6 +64,20 @@ export const houseSlice = createSlice({
         state.houses.push(action.payload);
       })
       .addCase(createHouse.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+
+      .addCase(getHouses.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getHouses.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.goals = action.payload;
+      })
+      .addCase(getHouses.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
