@@ -7,7 +7,9 @@ const {
   deleteHouse,
 } = require("../controllers/houseController");
 
-router.route("/").get(getHouses).post(setHouse);
-router.route("/:id").delete(deleteHouse).put(updateHouse);
+const { protect } = require("../middleware/authMiddleware");
+
+router.route("/").get(protect, getHouses).post(protect, setHouse);
+router.route("/:id").delete(protect, deleteHouse).put(protect, updateHouse);
 
 module.exports = router;
