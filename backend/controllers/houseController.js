@@ -1,13 +1,12 @@
 const asyncHandler = require("express-async-handler");
 const { request, globalAgent } = require("http");
-
 const House = require("../models/houseModel");
 
 // @desc    Get houses
 // @route   GET /api/houses
 // @access  Public
 const getHouses = asyncHandler(async (req, res) => {
-  const houses = await House.find();
+  const houses = await House.find({ user: req.user.id });
 
   res.status(200).json(houses);
 });
