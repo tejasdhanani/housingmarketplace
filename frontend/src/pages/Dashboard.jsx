@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 import HouseForm from "../components/HouseForm";
 import HouseItem from "../components/HouseItem";
 import Spinner from "../components/Spinner";
-import { getHouses, reset } from "../features/houses/houseSlice";
+import { getHouses } from "../features/houses/houseSlice";
+import { reset } from "../features/auth/authSlice";
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -21,6 +22,7 @@ function Dashboard() {
       console.log(message);
       // dispatch(reset());
     }
+
     if (!user) {
       navigate("/login");
     }
