@@ -1,6 +1,7 @@
 const asyncHandler = require("express-async-handler");
-const { request, globalAgent } = require("http");
+
 const House = require("../models/houseModel");
+const User = require("../models/userModel");
 
 // @desc    Get houses
 // @route   GET /api/houses
@@ -22,6 +23,7 @@ const setHouse = asyncHandler(async (req, res) => {
 
   const house = await House.create({
     text: req.body.text,
+    user: req.user.id,
   });
 
   res.status(200).json(house);
@@ -36,6 +38,20 @@ const updateHouse = asyncHandler(async (req, res) => {
   if (!house) {
     res.status(400);
     throw new Error("House not found");
+  }
+
+  const user = await User.findById(req.user.id);
+
+  // Check for user
+  if (!user) {
+    res.status(401);
+    throw new Error("User not found");
+  }
+
+  // Make sure the logged in user matches the house user
+  if (goal.user.toString() !== user.id) {
+    res.status(401);
+    throw new Error("User not authorized");
   }
 
   const updatedHouse = await House.findByIdAndUpdate(req.params.id, req.body, {
@@ -54,6 +70,20 @@ const deleteHouse = asyncHandler(async (req, res) => {
   if (!house) {
     res.status(400);
     throw new Error("House not found");
+  }
+
+  const user = await User.findById(req.user.id);
+
+  // Check for user
+  if (!user) {
+    res.status(401);
+    throw new Error("User not found");
+  }
+
+  // Make sure the logged in user matches the house user
+  if (goal.user.toString() !== user.id) {
+    res.status(401);
+    throw new Error("User not authorized");
   }
 
   await house.remove();
