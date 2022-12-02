@@ -47,7 +47,7 @@ const updateHouse = asyncHandler(async (req, res) => {
   }
 
   // Make sure the logged in user matches the house user
-  if (goal.user.toString() !== req.user.id) {
+  if (house.user.toString() !== req.user.id) {
     res.status(401);
     throw new Error("User not authorized");
   }
@@ -77,7 +77,7 @@ const deleteHouse = asyncHandler(async (req, res) => {
   }
 
   // Make sure the logged in user matches the house user
-  if (goal.user.toString() !== req.user.id) {
+  if (house.user.toString() !== req.user.id) {
     res.status(401);
     throw new Error("User not authorized");
   }
