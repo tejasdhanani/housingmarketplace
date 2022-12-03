@@ -10,8 +10,11 @@ const {
 
 const { protect } = require("../middleware/authMiddleware");
 
+// Private
 router.route("/").get(protect, getHouses).post(protect, setHouse);
-router.route("/").get(getAllHouses);
 router.route("/:id").delete(protect, deleteHouse).put(protect, updateHouse);
+
+// Public
+router.route("/all").get(getAllHouses);
 
 module.exports = router;
