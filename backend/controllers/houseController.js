@@ -5,9 +5,18 @@ const User = require("../models/userModel");
 
 // @desc    Get houses
 // @route   GET /api/houses
-// @access  Public
+// @access  Private
 const getHouses = asyncHandler(async (req, res) => {
   const houses = await House.find({ user: req.user.id });
+
+  res.status(200).json(houses);
+});
+
+// @desc    Get all houses
+// @route   GET /api/houses
+// @access  Public
+const getAllHouses = asyncHandler(async (req, res) => {
+  const houses = await House.find();
 
   res.status(200).json(houses);
 });
@@ -89,6 +98,7 @@ const deleteHouse = asyncHandler(async (req, res) => {
 
 module.exports = {
   getHouses,
+  getAllHouses,
   setHouse,
   updateHouse,
   deleteHouse,
