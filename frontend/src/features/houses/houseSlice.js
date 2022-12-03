@@ -29,12 +29,25 @@ export const createHouse = createAsyncThunk(
 );
 
 // Get user house
-export const getHouses = createAsyncThunk(
+export const getHouses = createAsyncThunk("houses/get", async (_, thunkAPI) => {
+  try {
+    const token = thunkAPI.getState().auth.user.token;
+    return await houseService.getHouses(token);
+  } catch (error) {
+    const message =
+      (error.response && error.response.data && error.response.data.message) ||
+      error.message ||
+      error.toString();
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+
+// Get All Houses
+export const getAllHouses = createAsyncThunk(
   "houses/getAll",
   async (_, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.user.token;
-      return await houseService.getHouses(token);
+      return await houseService.getAllHouses();
     } catch (error) {
       const message =
         (error.response &&
@@ -97,6 +110,20 @@ export const houseSlice = createSlice({
         state.houses = action.payload;
       })
       .addCase(getHouses.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+
+      .addCase(getAllHouses.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getAllHouses.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.houses = action.payload;
+      })
+      .addCase(getAllHouses.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

@@ -28,6 +28,13 @@ const getHouses = async (token) => {
   return response.data;
 };
 
+// Get All houses
+const getAllHouses = async () => {
+  const response = await axios.get(API_URL + "all");
+
+  return response.data;
+};
+
 // Delete user house
 const deleteHouse = async (houseId, token) => {
   const config = {
@@ -44,6 +51,7 @@ const deleteHouse = async (houseId, token) => {
 const houseService = {
   createHouse,
   getHouses,
+  getAllHouses,
   deleteHouse,
 };
 
