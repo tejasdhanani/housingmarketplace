@@ -42,7 +42,7 @@ function Homepage() {
         {houses.length > 0 ? (
           <div className="houses">
             {houses.map((house) => (
-              <HouseItem key={house._id} house={house} />
+              <HouseItem key={house._id} house={house} canDelete={false} />
             ))}
           </div>
         ) : (
