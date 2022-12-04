@@ -1,7 +1,5 @@
-const asyncHandler = require("express-async-handler");
-
 const House = require("../models/houseModel");
-const User = require("../models/userModel");
+const asyncHandler = require("express-async-handler");
 
 // @desc    Get houses
 // @route   GET /api/houses
@@ -30,12 +28,20 @@ const setHouse = asyncHandler(async (req, res) => {
     throw new Error("Please add a text field");
   }
 
-  const house = await House.create({
-    text: req.body.text,
-    user: req.user.id,
-  });
-
-  res.status(200).json(house);
+  House.create(
+    {
+      user: req.body.id,
+      text: req.body.text,
+      img: req.file.buffer,
+    },
+    (err, data) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.status(201).json(data);
+      }
+    }
+  );
 });
 
 // @desc    Update house
