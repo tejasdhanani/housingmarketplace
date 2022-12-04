@@ -36,7 +36,6 @@ function Homepage() {
         <h1>Welcome Houseseaker</h1>
         <p>Houses Homepage</p>
       </section>
-      <HouseForm />
 
       <section className="content">
         {houses.length > 0 ? (
