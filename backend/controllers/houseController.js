@@ -28,20 +28,16 @@ const setHouse = asyncHandler(async (req, res) => {
     throw new Error("Please add a text field");
   }
 
-  House.create(
-    {
-      user: req.body.id,
-      text: req.body.text,
-      img: req.file.buffer,
+  const house = await House.create({
+    text: req.body.text,
+    user: req.user.id,
+    file: {
+      data: req.file.buffer,
+      contentType: req.file.mimetype,
     },
-    (err, data) => {
-      if (err) {
-        console.log(err);
-      } else {
-        res.status(201).json(data);
-      }
-    }
-  );
+  });
+
+  res.status(200).json(house);
 });
 
 // @desc    Update house
