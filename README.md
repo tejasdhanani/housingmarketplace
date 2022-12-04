@@ -1,3 +1,3 @@
 ## Housing Marketplace
 
-This is a simple website which allows users to get all the houses listed nearby.
+A simple website which allows users to search and advertise for houses listed nearby.
