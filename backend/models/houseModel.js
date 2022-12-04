@@ -11,6 +11,11 @@ const houseSchema = mongoose.Schema(
       type: String,
       required: [true, "Please add a text value"],
     },
+    img: {
+      data: Buffer,
+      required: [true, "Please add an image"],
+      type: String,
+    },
   },
   {
     timestamps: true,
