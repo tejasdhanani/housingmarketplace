@@ -17,7 +17,7 @@ function HouseForm() {
 
   return (
     <div className="form">
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} enctype="multipart/form-data">
         <div className="form-group">
           <label htmlFor="text">House</label>
           <input
@@ -27,6 +27,9 @@ function HouseForm() {
             value={text}
             onChange={(e) => setText(e.target.value)}
           />
+        </div>
+        <div className="form-group">
+          <input type="file" name="avatar" />
         </div>
         <div className="form-group">
           <button className="btn btn-block" type="submit">
