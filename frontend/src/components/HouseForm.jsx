@@ -21,6 +21,7 @@ function HouseForm() {
         <div className="form-group">
           <label htmlFor="text">House</label>
           <input
+            placeholder="Enter house name"
             type="text"
             name="text"
             id="text"
