@@ -17,7 +17,7 @@ function HouseForm() {
 
   return (
     <div className="form">
-      <form onSubmit={onSubmit} enctype="multipart/form-data">
+      <form onSubmit={onSubmit} encType="multipart/form-data">
         <div className="form-group">
           <label htmlFor="text">House</label>
           <input
