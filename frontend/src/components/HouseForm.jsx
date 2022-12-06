@@ -6,13 +6,15 @@ import React from "react";
 
 function HouseForm() {
   const [text, setText] = useState("");
+  const [image, setImage] = useState();
   const dispatch = useDispatch();
 
   const onSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(createHouse({ text }));
+    dispatch(createHouse({ text, image }));
     setText("");
+    setImage(null);
   };
 
   return (
@@ -30,7 +32,11 @@ function HouseForm() {
           />
         </div>
         <div className="form-group">
-          <input type="file" name="avatar" />
+          <input
+            type="file"
+            name="avatar"
+            onChange={(e) => setImage(e.target.files[0])}
+          />
         </div>
         <div className="form-group">
           <button className="btn btn-block" type="submit">

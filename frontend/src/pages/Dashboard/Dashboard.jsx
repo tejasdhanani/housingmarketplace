@@ -1,10 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Outlet, useNavigate } from "react-router-dom";
-import HouseForm from "../../components/HouseForm";
-import HouseItem from "../../components/HouseItem";
-import Spinner from "../../components/Spinner";
-import { getHouses } from "../../features/houses/houseSlice";
 import { reset } from "../../features/auth/authSlice";
 
 function Dashboard() {
@@ -13,30 +9,22 @@ function Dashboard() {
 
   const { user } = useSelector((state) => state.auth);
 
-  const { houses, isLoading, isError, message } = useSelector(
-    (state) => state.houses
-  );
+  const { isError, message } = useSelector((state) => state.houses);
 
   useEffect(() => {
     if (isError) {
       console.log(message);
-      // dispatch(reset());
     }
 
     if (!user) {
       navigate("/");
     }
 
-    dispatch(getHouses());
-
     return () => {
       dispatch(reset());
     };
   }, [user, navigate, isError, message, dispatch]);
 
-  if (isLoading) {
-    return <Spinner />;
-  }
   return (
     <>
       <div
