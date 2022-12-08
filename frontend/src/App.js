@@ -8,6 +8,8 @@ import ViewHouses from "./pages/Dashboard/ViewHouses";
 import Homepage from "./pages/Homepage";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Profile from "./pages/Profile/Profile";
+import ChangePassword from "./pages/Profile/ChangePassword";
 
 function App() {
   return (
@@ -17,6 +19,9 @@ function App() {
           <Header />
           <Routes>
             <Route path="/" element={<Homepage />} />
+            <Route path="/profile" element={<Profile />}>
+              <Route path="changepassword" element={<ChangePassword />} />
+            </Route>
             <Route path="/dashboard" element={<Dashboard />}>
               <Route path="addhouse" element={<AddHouse />} />
               <Route path="viewhouses" element={<ViewHouses />} />
