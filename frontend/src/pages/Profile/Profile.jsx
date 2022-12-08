@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 
 function Profile() {
   const navigate = useNavigate();
@@ -12,7 +12,15 @@ function Profile() {
     }
   }, [user, navigate]);
 
-  return <div>Profile</div>;
+  return (
+    <>
+      <div>Profile</div>
+      <Link to="/profile/changepassword" className="btn btn-half">
+        Change Password
+      </Link>
+      <Outlet />
+    </>
+  );
 }
 
 export default Profile;
