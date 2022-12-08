@@ -29,10 +29,22 @@ const logout = () => {
   localStorage.removeItem("user");
 };
 
+// change Password
+const changePassword = async (passwords) => {
+  const response = await axios.post(API_URL + "changepassword", passwords);
+
+  if (response.data) {
+    localStorage.removeItem("user");
+  }
+
+  return response.data;
+};
+
 const authService = {
   register,
   login,
   logout,
+  changePassword,
 };
 
 export default authService;
