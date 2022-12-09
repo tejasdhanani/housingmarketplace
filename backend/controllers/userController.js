@@ -75,6 +75,39 @@ const getMe = asyncHandler(async (req, res) => {
   res.status(200).json(req.user);
 });
 
+// @desc    Change user password
+// @route   POST /api/users/changepassword
+// @access  Public
+const changePassword = asyncHandler(async (req, res) => {
+  const { email, oldPassword, newPassword } = req.body;
+
+  if (!email || !oldPassword || !newPassword) {
+    res.status(400);
+    throw new Error("Please add all fields");
+  }
+
+  // Check for user email
+  const user = await User.findOne({ email });
+
+  if (user && (await bcrypt.compare(oldPassword, user.password))) {
+    // Hash password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(newPassword, salt);
+
+    await User.updateOne(
+      { email: email },
+      {
+        password: hashedPassword,
+      }
+    );
+
+    res.status(201).json("Password updated");
+  } else {
+    res.status(400);
+    throw new Error("Invalid credentials");
+  }
+});
+
 // Generate JWT
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -86,4 +119,5 @@ module.exports = {
   registerUser,
   loginUser,
   getMe,
+  changePassword,
 };
