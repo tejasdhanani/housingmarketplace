@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { changePassword } from "../../features/auth/authSlice";
 
@@ -10,13 +10,16 @@ function ChangePassword() {
 
   const dispatch = useDispatch();
 
+  const { user } = useSelector((state) => state.auth);
+
   const onSubmit = (event) => {
     event.preventDefault();
 
     if (newPassword !== confPassword) {
       toast.error("Passwords do not match");
     } else {
-      dispatch(changePassword({ oldPassword, newPassword }));
+      const email = user.email;
+      dispatch(changePassword({ email, oldPassword, newPassword }));
     }
   };
 

@@ -51,9 +51,9 @@ export const logout = createAsyncThunk("auth/logout", async () => {
 // change password
 export const changePassword = createAsyncThunk(
   "auth/changepassword",
-  async (passwords, thunkAPI) => {
+  async (userData, thunkAPI) => {
     try {
-      return await authService.changePassword(passwords);
+      return await authService.changePassword(userData);
     } catch (error) {
       const message =
         (error.response &&
