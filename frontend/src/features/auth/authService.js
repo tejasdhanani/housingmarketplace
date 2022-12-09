@@ -33,10 +33,6 @@ const logout = () => {
 const changePassword = async (userData) => {
   const response = await axios.post(API_URL + "changepassword", userData);
 
-  if (response.data) {
-    localStorage.removeItem("user");
-  }
-
   return response.data;
 };
 
