@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { changePassword } from "../../features/auth/authSlice";
@@ -10,7 +10,13 @@ function ChangePassword() {
 
   const dispatch = useDispatch();
 
-  const { user } = useSelector((state) => state.auth);
+  const { user, message, isError } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+  }, [message, isError]);
 
   const onSubmit = (event) => {
     event.preventDefault();
