@@ -23,18 +23,51 @@ const getAllHouses = asyncHandler(async (req, res) => {
 // @route   POST /api/houses
 // @access  Private
 const setHouse = asyncHandler(async (req, res) => {
-  if (!req.body.text) {
+  if (!req.body.title) {
     res.status(400);
     throw new Error("Please add a text field");
   }
 
+  const {
+    title,
+    image,
+    city,
+    postalCode,
+    description,
+    rent,
+    sqFt,
+    type,
+    laundry,
+    bedroom,
+    bathroom,
+    petsAllowed,
+    canSmoke,
+    isFurnished,
+    lease,
+    walkthroughVideo,
+  } = req.body;
+
   const house = await House.create({
-    text: req.body.text,
+    title,
     user: req.user.id,
-    file: {
-      data: req.file.buffer,
-      contentType: req.file.mimetype,
+    image: {
+      data: image.buffer,
+      contentType: image.mimetype,
     },
+    city,
+    postalCode,
+    description,
+    rent,
+    sqFt,
+    type,
+    laundry,
+    bedroom,
+    bathroom,
+    petsAllowed,
+    canSmoke,
+    isFurnished,
+    lease,
+    walkthroughVideo,
   });
 
   res.status(200).json(house);
