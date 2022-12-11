@@ -16,8 +16,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/api/houses", require("./routes/houseRoutes"));
 app.use("/api/users", require("./routes/userRoutes"));
 
-// Undo server frontend
-
 app.use(errorHandler);
 
 app.listen(port, () => console.log(`Server started n port ${port}`));
