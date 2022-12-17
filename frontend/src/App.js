@@ -10,6 +10,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Profile from "./pages/Profile/Profile";
 import ChangePassword from "./pages/Profile/ChangePassword";
+import HousePage from "./pages/HousePage";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Header />
           <Routes>
             <Route path="/" element={<Homepage />} />
+            <Route path="/houses/:id" element={<HousePage />} />
             <Route path="/profile" element={<Profile />}>
               <Route path="changepassword" element={<ChangePassword />} />
             </Route>
