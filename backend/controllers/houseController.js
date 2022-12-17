@@ -30,7 +30,6 @@ const setHouse = asyncHandler(async (req, res) => {
 
   const {
     title,
-    image,
     city,
     postalCode,
     description,
@@ -51,8 +50,8 @@ const setHouse = asyncHandler(async (req, res) => {
     title,
     user: req.user.id,
     image: {
-      data: image.buffer,
-      contentType: image.mimetype,
+      data: req.file.buffer,
+      contentType: req.file.mimetype,
     },
     city,
     postalCode,
