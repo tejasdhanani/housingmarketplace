@@ -1,33 +1,20 @@
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { deleteHouse } from "../features/houses/houseSlice";
 import { arrayBufferToBase64 } from "../functions/arrayBufferToBase64";
 
 function HouseItem({ house, canDelete }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const {
-    title,
-    image,
-    city,
-    postalCode,
-    description,
-    rent,
-    sqFt,
-    type,
-    laundry,
-    bedroom,
-    bathroom,
-    petsAllowed,
-    canSmoke,
-    isFurnished,
-    lease,
-    walkthroughVideo,
-  } = house;
-
-  console.log(house);
+  const { title, image, city, rent } = house;
 
   return (
-    <div className="house">
+    <div
+      className="house"
+      style={{ cursor: "pointer" }}
+      onClick={() => navigate(`/houses/${house._id}`, { state: { house } })}
+    >
       {/* <div>{new Date(house.createdAt).toLocaleString("en-US")}</div> */}
       <h2>{title}</h2>
       {image && (
