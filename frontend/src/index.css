@@ -135,6 +135,16 @@ h3 {
   margin: 0 0 5px 3px;
 }
 
+.form-group-checkbox {
+  text-align: left;
+  /* display: block; */
+  margin: 0 0 5px 3px;
+}
+
+.form-group-checkbox input{
+  margin: 0 0 5px 10px;
+}
+
 .btn {
   padding: 10px 20px;
   border: 1px solid #000;
