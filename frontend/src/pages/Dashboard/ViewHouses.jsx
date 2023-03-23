@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import HouseItem from "../../components/HouseItem";
 import Spinner from "../../components/Spinner";
 import { reset } from "../../features/auth/authSlice";
-import { getHouses } from "../../features/houses/houseSlice";
+import { getMyHouses } from "../../features/houses/houseSlice";
 
 function ViewHouses() {
   const dispatch = useDispatch();
@@ -17,7 +17,7 @@ function ViewHouses() {
       console.log(message);
     }
 
-    dispatch(getHouses());
+    dispatch(getMyHouses());
 
     return () => {
       dispatch(reset());

@@ -17,7 +17,7 @@ const createHouse = async (houseData, token) => {
 };
 
 // Get user house
-const getHouses = async (token) => {
+const getMyHouses = async (token) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -51,7 +51,7 @@ const deleteHouse = async (houseId, token) => {
 
 const houseService = {
   createHouse,
-  getHouses,
+  getMyHouses,
   getAllHouses,
   deleteHouse,
 };

@@ -8,7 +8,7 @@ const Storage = multer.memoryStorage();
 
 const upload = multer({ storage: Storage });
 const {
-  getHouses,
+  getMyHouses,
   setHouse,
   updateHouse,
   deleteHouse,
@@ -20,7 +20,7 @@ const { protect } = require("../middleware/authMiddleware");
 // Private
 router
   .route("/")
-  .get(protect, getHouses)
+  .get(protect, getMyHouses)
   .post(protect, upload.single("image"), setHouse);
 router.route("/:id").delete(protect, deleteHouse).put(protect, updateHouse);
 

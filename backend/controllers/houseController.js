@@ -4,7 +4,7 @@ const asyncHandler = require("express-async-handler");
 // @desc    Get houses
 // @route   GET /api/houses
 // @access  Private
-const getHouses = asyncHandler(async (req, res) => {
+const getMyHouses = asyncHandler(async (req, res) => {
   const houses = await House.find({ user: req.user.id });
 
   res.status(200).json(houses);
@@ -131,7 +131,7 @@ const deleteHouse = asyncHandler(async (req, res) => {
 });
 
 module.exports = {
-  getHouses,
+  getMyHouses,
   getAllHouses,
   setHouse,
   updateHouse,

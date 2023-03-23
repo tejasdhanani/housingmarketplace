@@ -19,8 +19,13 @@ function App() {
         <div className="container">
           <Header />
           <Routes>
+            {/* Public Routes */}
             <Route path="/" element={<Homepage />} />
             <Route path="/houses/:id" element={<HousePage />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+
+            {/* Private Routes */}
             <Route path="/profile" element={<Profile />}>
               <Route path="changepassword" element={<ChangePassword />} />
             </Route>
@@ -28,8 +33,6 @@ function App() {
               <Route path="addhouse" element={<AddHouse />} />
               <Route path="viewhouses" element={<ViewHouses />} />
             </Route>
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
           </Routes>
         </div>
       </Router>
