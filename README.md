@@ -2,6 +2,8 @@
 
 This is a web application that allows users to view housing properties. Users can create an account, add property listings, and browse listings posted by other users. This application is built using the MERN stack (MongoDB, Express, React, Node.js) and JWT.
 
+![Demo Image](Demo.png)
+
 
 ## Installation
 
