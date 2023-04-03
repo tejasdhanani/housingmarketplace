@@ -25,5 +25,5 @@ app.use(errorHandler);
 // app.listen(port, () => console.log(`Server started n port ${port}`));
 mongoose.connection.once("open", () => {
   console.log("Connected to MongoDB");
-  app.listen(port, () => console.log(`Server running on port ${PORT}`));
+  app.listen(port, () => console.log(`Server running on port ${port}`));
 });
