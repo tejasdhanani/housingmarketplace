@@ -7,6 +7,7 @@ const connectDB = require("./config/db");
 const port = process.env.PORT;
 const cors = require("cors");
 const corsOptions = require("./config/corsOptions");
+const mongoose = require("mongoose");
 
 connectDB();
 
@@ -21,4 +22,8 @@ app.use("/api/users", require("./routes/userRoutes"));
 
 app.use(errorHandler);
 
-app.listen(port, () => console.log(`Server started n port ${port}`));
+// app.listen(port, () => console.log(`Server started n port ${port}`));
+mongoose.connection.once("open", () => {
+  console.log("Connected to MongoDB");
+  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+});
